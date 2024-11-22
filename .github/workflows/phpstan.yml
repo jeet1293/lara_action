@@ -1,22 +1,39 @@
-name: Static Analysis
- 
-on: [push, pull_request]
- 
+name: Run Static Analysis
+
+on:
+  push:
+    branches: [ main]
+  pull_request:
+    branches: [ main]
+    paths:
+      - '**.php'
+      - 'composer.json'
+
 jobs:
   phpstan:
     name: phpstan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
- 
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.3.11'
           coverage: none
- 
+
+      - name: Cache Composer packages
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
       - name: Install composer dependencies
-        run: composer install -n --prefer-dist
- 
+        run: |
+          composer config --no-plugins allow-plugins.phpstan/extension-installer true
+          composer install --no-interaction --prefer-dist --no-progress --no-suggest
+
       - name: Run Static Analysis
         run: ./vendor/bin/phpstan --error-format=github
