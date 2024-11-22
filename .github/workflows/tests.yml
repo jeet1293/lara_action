@@ -1,4 +1,4 @@
-name: Run tests
+name: Run Tests of Lara Action
 
 on:
   push:
@@ -21,14 +21,6 @@ jobs:
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
-
-      - name: Cache Composer packages
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
 
       - name: Run composer install
         run: composer install --no-interaction --prefer-dist --no-progress

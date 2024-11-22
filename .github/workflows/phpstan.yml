@@ -1,4 +1,4 @@
-name: Run Static Analysis
+name: Run Static Analysis of Lara Action
 
 on:
   push:
@@ -22,18 +22,10 @@ jobs:
           php-version: '8.3'
           coverage: none
 
-      - name: Cache Composer packages
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
       - name: Install composer dependencies
         run: |
           composer config --no-plugins allow-plugins.phpstan/extension-installer true
           composer install --no-interaction --prefer-dist --no-progress
 
       - name: Run Static Analysis
-        run: ./vendor/bin/phpstan --error-format=github --memory-limit=2G
+        run: ./vendor/bin/phpstan --error-format=github
