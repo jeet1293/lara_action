@@ -1,13 +1,8 @@
 name: Run Static Analysis of Lara Action
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
-    paths:
-      - '**.php'
-      - 'composer.*'
 
 jobs:
   phpstan:

@@ -1,12 +1,8 @@
 name: Run Tests of Lara Action
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
-    paths:
-      - '**.php'
 
 jobs:
   tests:
