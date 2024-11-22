@@ -1,4 +1,6 @@
-name: Run Tests of Lara Action
+name: "My PHPUnit Tests"
+
+run-name: Run PHPUnit Tests of Lara Action
 
 on:
   pull_request:

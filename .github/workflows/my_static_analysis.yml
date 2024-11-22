@@ -1,4 +1,6 @@
-name: Run Static Analysis of Lara Action
+name: "My Static Analysis"
+
+run-name: Run Static Analysis of Lara Action
 
 on:
   pull_request:
