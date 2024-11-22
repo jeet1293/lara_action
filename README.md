@@ -1,4 +1,10 @@
+
+
 # Lara Action
+
+[![Tests](https://github.com/jeet1293/lara_action/actions/workflows/tests.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/tests.yml)
+[![PHPStan](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a dummy Laravel project setup using [Laravel Sail](https://laravel.com/docs/11.x/sail) for local development. It is intended for testing [GitHub Actions](https://github.com/features/actions) and automating workflows such as running tests and performing static analysis with PHPStan.
 
@@ -39,12 +45,20 @@ Ensure that you have the following tools installed on your system:
     ```
 
    This will start the Docker containers in detached mode. Sail sets up services like the web server, database, etc., using Docker.
+   This will start the Docker containers in detached mode. Sail sets up services like the web server, database, etc., using Docker.
 
-4. Run the Laravel application:
+4. Configure environment variables:
 
+    ```bash
+        cp .env.example .env
+        ./vendor/bin/sail artisan key:generate
+    ```
+   Please make the necessary change(i.e. Generate the application key)
+
+5. Run the Laravel application:
    Open your browser and go to:
 
-    ```
+    ```plaintext
     http://localhost
     ```
 
@@ -55,7 +69,8 @@ Ensure that you have the following tools installed on your system:
 You can run Laravel Artisan commands within the Docker container by prefixing them with `./vendor/bin/sail`. For example, to run migrations:
 
 ```bash
-./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan make:controller MyController
+./vendor/bin/sail artisan make:Model MyModel
 ```
 
 ## GitHub Actions Workflow
