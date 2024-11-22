@@ -1,4 +1,4 @@
-name: Run Static Analysis
+name: Run Static Analysis of Lara Action
 
 on:
   push:
