@@ -1,9 +1,8 @@
 
 
 # Lara Action
-
-[![Tests](https://github.com/jeet1293/lara_action/actions/workflows/tests.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/tests.yml)
-[![PHPStan](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml)
+[![Run tests](https://github.com/jeet1293/lara_action/actions/workflows/phpunit.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/phpunit.yml)
+[![Run Static Analysis](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml/badge.svg)](https://github.com/jeet1293/lara_action/actions/workflows/phpstan.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a dummy Laravel project setup using [Laravel Sail](https://laravel.com/docs/11.x/sail) for local development. It is intended for testing [GitHub Actions](https://github.com/features/actions) and automating workflows such as running tests and performing static analysis with PHPStan.
