@@ -45,7 +45,6 @@ Ensure that you have the following tools installed on your system:
     ```
 
    This will start the Docker containers in detached mode. Sail sets up services like the web server, database, etc., using Docker.
-   This will start the Docker containers in detached mode. Sail sets up services like the web server, database, etc., using Docker.
 
 4. Configure environment variables:
 
