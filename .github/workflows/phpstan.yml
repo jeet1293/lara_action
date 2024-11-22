@@ -2,24 +2,24 @@ name: Run Static Analysis
 
 on:
   push:
-    branches: [ main]
+    branches: [main]
   pull_request:
-    branches: [ main]
+    branches: [main]
     paths:
       - '**.php'
-      - 'composer.json'
+      - 'composer.*'
 
 jobs:
   phpstan:
     name: phpstan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.11'
+          php-version: '8.3'
           coverage: none
 
       - name: Cache Composer packages
@@ -33,7 +33,7 @@ jobs:
       - name: Install composer dependencies
         run: |
           composer config --no-plugins allow-plugins.phpstan/extension-installer true
-          composer install --no-interaction --prefer-dist --no-progress --no-suggest
+          composer install --no-interaction --prefer-dist --no-progress
 
       - name: Run Static Analysis
-        run: ./vendor/bin/phpstan --error-format=github
+        run: ./vendor/bin/phpstan --error-format=github --memory-limit=2G

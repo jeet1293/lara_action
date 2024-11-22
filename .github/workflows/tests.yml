@@ -2,9 +2,9 @@ name: Run tests
 
 on:
   push:
-    branches: [ main]
+    branches: [main]
   pull_request:
-    branches: [ main]
+    branches: [main]
     paths:
       - '**.php'
 
@@ -13,12 +13,12 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.11'
+          php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
@@ -31,9 +31,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Run composer install
-        run: |
-          composer config --no-plugins
-          composer install --no-interaction --prefer-dist --no-progress --no-suggest
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Prepare Laravel Application
         run: |
