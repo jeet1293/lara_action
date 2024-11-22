@@ -1,4 +1,4 @@
-name: Run tests
+name: Run Static Analysis
 
 on:
   push:
@@ -7,10 +7,11 @@ on:
     branches: [main]
     paths:
       - '**.php'
+      - 'composer.*'
 
 jobs:
-  tests:
-    name: Run tests
+  phpstan:
+    name: phpstan
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +20,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
 
       - name: Cache Composer packages
@@ -30,13 +30,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Run composer install
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Prepare Laravel Application
+      - name: Install composer dependencies
         run: |
-          cp .env.ci .env
-          php artisan key:generate
+          composer config --no-plugins allow-plugins.phpstan/extension-installer true
+          composer install --no-interaction --prefer-dist --no-progress
 
-      - name: Run tests
-        run: php artisan test
+      - name: Run Static Analysis
+        run: ./vendor/bin/phpstan --error-format=github --memory-limit=2G
