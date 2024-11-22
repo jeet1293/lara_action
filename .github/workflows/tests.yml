@@ -1,16 +1,12 @@
-name: Run tests
+name: Run Tests of Lara Action
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '**.php'
   pull_request:
     branches: [main]
 
 jobs:
   tests:
-    name: Run PHPUnit
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,14 +17,6 @@ jobs:
           php-version: '8.3'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
           coverage: none
-
-      - name: Cache Composer packages
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
 
       - name: Run composer install
         run: composer install --no-interaction --prefer-dist --no-progress
